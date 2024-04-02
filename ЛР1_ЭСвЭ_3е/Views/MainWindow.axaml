@@ -1,0 +1,70 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ЛР1_ЭСвЭ_3е.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="550" d:DesignHeight="400"
+        Width="550" Height="400" Padding="15"
+		WindowStartupLocation="CenterScreen"
+		CanResize="False"
+        x:Class="ЛР1_ЭСвЭ_3е.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Оценка вероятности инфаркта">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+	<StackPanel Spacing="10">
+		<StackPanel>
+			<TextBlock Text="ФИО"/>
+			<TextBox/>
+		</StackPanel>
+
+		<StackPanel>
+			<TextBlock Text="Пол"/>
+			<ComboBox SelectedIndex="{Binding Gender}">
+				<ComboBoxItem>Мужской</ComboBoxItem>
+				<ComboBoxItem>Женский</ComboBoxItem>
+			</ComboBox>
+		</StackPanel>
+
+		<Grid RowDefinitions="auto, auto" ColumnDefinitions="auto, 25, auto, 25, auto">
+			<TextBlock Grid.Row="0" Grid.Column="0"
+					   Text="Вес, целое кол-во кг"/>
+			<NumericUpDown Grid.Row="1" Grid.Column="0" ShowButtonSpinner="False"
+						   Value="{Binding Weight}"/>
+			
+			<TextBlock Grid.Row="0" Grid.Column="2"
+					   Text="Рост, целое кол-во см"/>
+			<NumericUpDown Grid.Row="1" Grid.Column="2" ShowButtonSpinner="False"
+						   Value="{Binding Height}"/>
+
+			<StackPanel Grid.Row="1" Grid.Column="4" Orientation="Horizontal" VerticalAlignment="Center">
+				<TextBlock Text="Избыточный вес: "/>
+				<TextBlock Text="{Binding ExcessWeight}"/>
+			</StackPanel>
+		</Grid>
+
+		<StackPanel>
+			<TextBlock Text="Пачек сигарет в день"/>
+			<NumericUpDown Increment="0.5" Minimum="0"
+						   Value="{Binding Cigarettes}"/>
+		</StackPanel>
+
+		<StackPanel>
+			<TextBlock Text="Алкоголь, грамм в день"/>
+			<NumericUpDown Increment="100" Minimum="0"
+						   Value="{Binding Alcohol}"/>
+		</StackPanel>
+
+		<StackPanel Orientation="Horizontal" Spacing="25">
+			<CheckBox Content="Боли в левой половине груди" IsChecked="{Binding ChestPain}"/>
+			<CheckBox Content="Боли в затылочной части" IsChecked="{Binding BackPain}"/>
+		</StackPanel>
+		
+		<TextBlock Text="{Binding Result}"/>
+
+	</StackPanel>
+</Window>
